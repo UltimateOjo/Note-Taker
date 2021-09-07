@@ -22,7 +22,7 @@
     <nav class="navbar navbar-dark bg-dark">
       <a class="navbar-brand" href="/">Note Taker </a>
       <div class="icons">
-        <i class="fas fa-save text-light save-note"></i>
+        <a class="fas fa-save text-light save-note" href="/api/notes">Save Note</a>
         <i class="fas fa-plus text-light new-note"></i>
       </div>
     </nav>
@@ -44,6 +44,26 @@
         </div>
       </div>
     </div>
+
     <script src="/assets/js/index.js"></script>
+
+    <script type="text/javascript">
+      // Question: What does this code do?
+      $("#fas fa-save text-light save-note").on("click", function (event) {
+        event.preventDefault();
+        const newDb = {
+          title: $("#note-title").val().trim(),
+          text: $("#note-textarea").val().trim(),
+        };
+  
+        // Question: What does this code do??
+        $.post("/api/notes", newDb)
+          .then(function (data) {
+            console.log("notes.html", data);
+            alert("Adding notes...");
+          });
+      });
+    </script>
+
   </body>
 </html>
